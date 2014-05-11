@@ -1,0 +1,75 @@
+{%extends "base.html"%}
+
+{%block content%}
+        <!--  main  -->
+
+    <div class="row" id="head">
+
+        <div class="jumbotron">
+            <br/>
+            <div class="container" >
+                <h1>百度校园推广搜索大赛</h1>
+                <h3>—登录—</h3>
+                <h3>在这里确认你的注册信息</h3>
+                <br />
+                <p class="center">
+                    <a href="{%url 'single_register'%}" class="btn white_btn">线上注册</a>
+                    <a href="{%url 'group_register'%}" class="btn white_btn">线下注册</a>
+                </p> 
+            </div>
+        </div>
+    </div>
+    
+    <div class="row light_grey">
+        <div class="container login_form">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="login">
+                <form class="login_form" action="" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="login_group">
+                        <h1>登录</h1>
+                        <p class="{% if form.username.errors %} has-error {% endif %}">
+                            <label for="{{form.username.id_for_label}}" id="form_label_username{% if form.username.error %}_error{% endif %}" 
+                                class="form_label form_label_user{% if form.username.errors %}_error{% endif %}">学号/队名</label>
+                            <input name="{{form.username.html_name}}" id="form_username" type="text" 
+                                class="form-control form_padding" placeholder="学号/队名" 
+                                value="{%if form.username.value%}{{form.username.value}}{%endif%}" maxlength="20" />
+                        </p>
+                        {% if form.username.errors %}
+                        <div class="callback_error">
+                            <p>{{form.username.errors}}</p>
+                        </div>
+                        {% else %}
+                        <br />
+                        {% endif %}
+
+                        <p class="{% if form.password.errors %} has-error {% endif %}">
+                            <label for="{{form.password.id_for_label}}" id="form_label_password{% if form.password.errors %}_error{% endif %}" 
+                                class="form_label form_label_password{% if form.password.errors %}_error{% endif %}">密码</label>
+                            <input name="{{form.password.html_name}}" id="form_password" type="password" 
+                                class="form-control form_padding" placeholder="密码" maxlength="20" />
+                        </p>
+                        {% if form.password.errors %}
+                        <div class="callback_error">
+                            <p>{{form.password.errors}}</p>
+                        </div>
+                        {% else %}
+                        <br />
+                        {% endif %}
+                        <p>
+                            <input type="submit" class="btn btn-success login_submit" value="登录" style="width:100%"/>
+                        </p>
+                    </div>
+                </form>
+                </div>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+
+        <!--  /main  -->
+
+{%endblock%}
